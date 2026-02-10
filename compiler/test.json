@@ -1,0 +1,18 @@
+{
+  "submit_dir": "/coursegrader/submits",
+  "testdata_dir": "/coursegrader/testdata",
+  "kernel_dir": "/coursegrader/dockerext",
+  "entrypoint": ["python3", "/coursegrader/dockerext/kernel.pyz"],
+  "testcases": [
+    {
+      "name": "softmax",
+      "submits": [
+        {
+          "name": "stu",
+          "verdict": "Accepted",
+          "score": "100"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{% extends "base.jinja" %}
+
+{% block body %}
+<script>
+  function disp_click(item_name) {
+    var disp_btn = document.getElementById(item_name + "_btn");
+    var disp_div = document.getElementById(item_name + "_div");
+    if (disp_div.style.display != "none") {
+      disp_div.style.display = "none"
+      disp_btn.innerHTML = "展开.."
+    }
+    else {
+      disp_div.style.display = "block"
+      disp_btn.innerHTML = "收起.."
+    }
+  }
+</script>
+<div
+  style="border-style: solid;border-top-width: 1px;border-color: #AAA;padding: 10px 30px 10px 10px; display: flex;
+  margin-top: 10px;margin-left: 10px;margin-bottom:20px;border-left-width:1px;border-right-width: 1px;border-bottom-width: 1px;">
+  <div style="margin-right: 20px;width: 144px;padding: 11px 0px 14px;">{{ info.passed }}/{{ info.all }}个通过测试用例</div>
+  <div style="padding: 10px; color:#999;float:right">状态:
+    {% if info.err_type != "Accept" %}
+    <span style="color:#F00;font-size: large;">
+    {% elif info.half_pass %}
+    <span style="color:#FFD700;font-size: large;">
+    {% else %}
+    <span style="color:#3A3;font-size: large;">
+    {% endif %}
+      {{info.err_type}}
+    </span>
+  </div>
+  <div style="padding: 13px 14px">总分: {{ info.score }}/{{ info.scmax }}</div>
+</div>
+{% for item in summary %}
+<div
+  style="display:flex;margin-left:10px;margin-bottom:10px;border-top-width:1px;border-style:solid;border-width:0px;border-top-width:1px;border-color:#AAA;">
+
+  <span style="margin-right: 20px;width: 250px;">{{item.name}}</span>
+  <span style="margin-right: 20px;width: 160px;">{{item.verdict}}</span>
+  <span style="margin-right: 20px;width: 40px;">{{item.scshow}}</span>
+  <!-- <span style="margin-right: 20px;width: 250px;">{{item.optimize}}</span>
+    <span style="margin-right: 20px;width: 400px;">{{item.optimize_baseline}}</span> -->
+  {% if item.verdict == "Accept" %}
+  <button style="display:none;background-color: #EEE;border-width: 0px;" onclick="disp_click('{{item.name}}')"
+    id="{{ item.name }}_btn">展开..</button>
+  {% else %}
+  <button style="background-color: #EEE;border-width: 0px;" onclick="disp_click('{{item.name}}')"
+    id="{{ item.name }}_btn">展开..</button>
+  {% endif %}
+</div>
+{% if item.verdict == "Wrong Answer" %}
+<div id="{{ item.name }}_div"
+  style="display:none;border-style:solid;border-width:1px;border-color:#F00;padding: 10px;margin-left: 10px;">
+  <div style="padding: 10px 0px 14px;
+      border-bottom: 1px solid #F44;color: #F00;
+      display: flex;">
+    <span style="display:block;margin-right: 20px;width: 144px;">输出</span>
+    <div>
+      <p style="color:black;">
+        {% for output in item.actual %}{{ output }}<br>{% endfor %}
+      </p>
+    </div>
+  </div>
+  <div style="padding: 10px 0px 14px;color: #F00;
+      display: flex;">
+    <span style="display:block;margin-right: 20px;width: 144px;">预期结果</span>
+    <div>
+      <p style="color:black;">
+        {% for output in item.expected %}{{ output }}<br>{% endfor %}
+      </p>
+    </div>
+  </div>
+</div>
+{% else %}
+<div id="{{ item.name }}_div"
+  style="display:none;border-style:solid;border-width:1px;border-color:#F00;padding: 10px;margin: 10px;">
+  <div style="padding: 10px 0px 14px;
+      color: #F00;
+      display: flex;">
+    <span style="display:block;margin-right: 20px;width: 144px;">错误信息</span>
+    <div>
+      <p style="color:black;">{{ item.detail }}</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}

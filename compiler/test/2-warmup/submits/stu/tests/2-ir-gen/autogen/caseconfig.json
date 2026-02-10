@@ -1,0 +1,485 @@
+{
+  "phase": "lab2",
+  "testcaseList": [
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/return.cminus",
+      "score": 3,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_1/return.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/decl_int.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_1/decl_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/decl_float.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_1/decl_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/decl_int_array.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_1/decl_int_array.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/decl_float_array.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_1/decl_float_array.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/input.cminus",
+      "score": 2,
+      "input": "/coursegrader/testdata/answers/lv0_1/input.in",
+      "output": "/coursegrader/testdata/answers/lv0_1/input.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/output_float.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_1/output_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_1/output_int.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_1/output_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_add_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_add_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_sub_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_sub_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_mul_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_mul_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_div_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_div_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_add_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_add_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_sub_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_sub_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_mul_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_mul_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_div_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_div_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_add_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_add_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_sub_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_sub_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_mul_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_mul_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_div_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_div_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_comp1.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_comp1.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_le_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_le_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_lt_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_lt_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_ge_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_ge_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_gt_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_gt_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_eq_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_eq_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_neq_int.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_neq_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_le_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_le_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_lt_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_lt_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_ge_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_ge_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_gt_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_gt_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_eq_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_eq_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_neq_float.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_neq_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_le_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_le_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_lt_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_lt_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_ge_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_ge_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_gt_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_gt_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_eq_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_eq_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_neq_mixed.cminus",
+      "score": 0.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_neq_mixed.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv0_2/num_comp2.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv0_2/num_comp2.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_int_var_local.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_int_var_local.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_int_array_local.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_int_array_local.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_int_var_global.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_int_var_global.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_int_array_global.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_int_array_global.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_float_var_local.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_float_var_local.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_float_array_local.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_float_array_local.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_float_var_global.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_float_var_global.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_float_array_global.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_float_array_global.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/assign_cmp.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/assign_cmp.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/innout.cminus",
+      "score": 1,
+      "input": "/coursegrader/testdata/answers/lv1/innout.in",
+      "output": "/coursegrader/testdata/answers/lv1/innout.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/idx_float.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/idx_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/negidx_int.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/negidx_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/negidx_float.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/negidx_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/negidx_intfuncall.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/negidx_intfuncall.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/negidx_floatfuncall.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/negidx_floatfuncall.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/negidx_voidfuncall.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/negidx_voidfuncall.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/selection1.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/selection1.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/selection2.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/selection2.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/selection3.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/selection3.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/iteration1.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/iteration1.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/iteration2.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/iteration2.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/scope.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/scope.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/transfer_float_to_int.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/transfer_float_to_int.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv1/transfer_int_to_float.cminus",
+      "score": 1,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv1/transfer_int_to_float.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/funcall_chain.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/funcall_chain.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/assign_chain.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/assign_chain.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/funcall_var.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/funcall_var.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/funcall_int_array.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/funcall_int_array.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/funcall_float_array.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/funcall_float_array.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/funcall_array_array.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/funcall_array_array.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/return_in_middle1.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/return_in_middle1.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/return_in_middle2.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/return_in_middle2.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/funcall_type_mismatch1.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/funcall_type_mismatch1.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/funcall_type_mismatch2.cminus",
+      "score": 2,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/funcall_type_mismatch2.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/return_type_mismatch1.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/return_type_mismatch1.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv2/return_type_mismatch2.cminus",
+      "score": 1.5,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv2/return_type_mismatch2.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv3/complex1.cminus",
+      "score": 3,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv3/complex1.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv3/complex2.cminus",
+      "score": 3,
+      "input": "/coursegrader/testdata/answers/lv3/complex2.in",
+      "output": "/coursegrader/testdata/answers/lv3/complex2.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv3/complex3.cminus",
+      "score": 2,
+      "input": "/coursegrader/testdata/answers/lv3/complex3.in",
+      "output": "/coursegrader/testdata/answers/lv3/complex3.out"
+    },
+    {
+      "name": "/coursegrader/testdata/testcases/lv3/complex4.cminus",
+      "score": 3,
+      "input": "",
+      "output": "/coursegrader/testdata/answers/lv3/complex4.out"
+    }
+  ]
+}

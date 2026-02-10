@@ -1,0 +1,97 @@
+{
+	"phase": "lab4_mem2reg",
+	"base_fraction": 40,
+	"idx": 4,
+	"testcaseList": [
+		{
+			"name": "/coursegrader/testdata/testcases/0_lab2_lv0_1.cminus",
+			"score": 2,
+			"input": "/coursegrader/testdata/testcases/0_lab2_lv0_1.in",
+			"output": "/coursegrader/testdata/testcases/0_lab2_lv0_1.out",
+			"err": "/coursegrader/testdata/testcases/0_lab2_lv0_1.err",
+			"min": 88,
+			"max": 0
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/1_lab2_lv0_2.cminus",
+			"score": 1,
+			"input": "",
+			"output": "/coursegrader/testdata/testcases/1_lab2_lv0_2.out",
+			"err": "/coursegrader/testdata/testcases/1_lab2_lv0_2.err",
+			"min": 0,
+			"max": 0
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/2_lab2_lv1.cminus",
+			"score": 3,
+			"input": "/coursegrader/testdata/testcases/2_lab2_lv1.in",
+			"output": "/coursegrader/testdata/testcases/2_lab2_lv1.out",
+			"min": 172,
+			"max": 120
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/3_lab2_lv2.cminus",
+			"score": 4,
+			"input": "",
+			"output": "/coursegrader/testdata/testcases/3_lab2_lv2.out",
+			"min": 332,
+			"max": 248
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/4_complex1.cminus",
+			"score": 4,
+			"input": "",
+			"output": "/coursegrader/testdata/testcases/4_complex1.out",
+			"min": 11260,
+			"max": 11204
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/5_complex2.cminus",
+			"score": 4,
+			"input": "/coursegrader/testdata/testcases/5_complex2.in",
+			"output": "/coursegrader/testdata/testcases/5_complex2.out",
+			"min": 60,
+			"max": 0
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/6_complex3.cminus",
+			"score": 4,
+			"input": "/coursegrader/testdata/testcases/6_complex3.in",
+			"output": "/coursegrader/testdata/testcases/6_complex3.out",
+			"min": 20,
+			"max": 0
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/7_complex4.cminus",
+			"score": 4,
+			"input": "",
+			"output": "/coursegrader/testdata/testcases/7_complex4.out",
+			"min": 140,
+			"max": 60
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/8_return_early.cminus",
+			"score": 6,
+			"input": "/coursegrader/testdata/testcases/8_return_early.in",
+			"output": "/coursegrader/testdata/testcases/8_return_early.out",
+			"min": 52,
+			"max": 40
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/9_licm0.cminus",
+			"score": 4,
+			"input": "/coursegrader/testdata/testcases/9_licm0.in",
+			"output": "/coursegrader/testdata/testcases/9_licm0.out",
+			"min": 96,
+			"max": 48
+		},
+		{
+			"name": "/coursegrader/testdata/testcases/10_licm_bad.cminus",
+			"score": 4,
+			"input": "",
+			"output": "/coursegrader/testdata/testcases/10_licm_bad.out",
+			"min": 12,
+			"max": 0
+		}
+	]
+}

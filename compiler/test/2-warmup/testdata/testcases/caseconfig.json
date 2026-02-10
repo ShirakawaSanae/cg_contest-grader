@@ -1,0 +1,55 @@
+{
+  "phase": "lab2_warmup",
+  "testcaseList": [
+    {
+      "name": "stu_assign_generator",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_cpp/stu_assign_generator",
+      "score": 15,
+      "answer": 20
+    },
+    {
+      "name": "stu_fun_generator",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_cpp/stu_fun_generator",
+      "score": 15,
+      "answer": 220
+    },
+    {
+      "name": "stu_if_generator",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_cpp/stu_if_generator",
+      "score": 15,
+      "answer": 233
+    },
+    {
+      "name": "stu_while_generator",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_cpp/stu_while_generator",
+      "score": 15,
+      "answer": 65
+    }
+  ],
+  "testcaseList_hand": [
+    {
+      "name": "assign_hand.ll",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_ll/assign_hand.ll",
+      "score": 10,
+      "answer": 20
+    },
+    {
+      "name": "fun_hand.ll",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_ll/fun_hand.ll",
+      "score": 10,
+      "answer": 220
+    },
+    {
+      "name": "if_hand.ll",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_ll/if_hand.ll",
+      "score": 10,
+      "answer": 233
+    },
+    {
+      "name": "while_hand.ll",
+      "submit_relative_path": "tests/2-ir-gen/warmup/stu_ll/while_hand.ll",
+      "score": 10,
+      "answer": 65
+    }
+  ]
+}
