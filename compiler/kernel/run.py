@@ -45,25 +45,52 @@ def run_softmax(job: Job, case: TestCases.SingleTestCase) -> dict:
     }
     # 加载测试输入，若没有测试数据可以直接运行
     # 加载测试输出
+    loge(f"-> case.output_src: {case.output_src}")
+    expected_output = None
     if case.output_src:
         with open(case.output_src) as f:
-            expected_output = f.read()
-    loge(f"-> execute python ")
+            expected_output = f.read().strip()
+    loge(f"-> set up env and execute python ")
     # 运行提交的程序
+    submit_dir = case.extension["submit_dir"]
     try:  
-        run_operation = f"cd {case.submit_dir} && rm -r kernel_meta && python softmax.py"
-        exec_result = gg.exec(run_operation, time_out=None)
-        actual_output = str2list(exec_result.stdout) if exec_result.stdout else []
+        # run_operation = f"cd {case.extension["submit_dir"]} && rm -rf kernel_meta && python softmax.py"
+        # exec_result = gg.exec(run_operation, time_out=None)
+        run_operation = (
+            f"cd {submit_dir} && "
+            f"source ./setup_env.sh && "
+            f"rm -rf kernel_meta && "
+            f"python softmax.py"
+        )
+        exec_result = gg.exec(run_operation)
+        #gg.exec("sleep 5s")
+        loge(f"-> executed python and get result {exec_result}")
+        # 加载学生的输出
+        actual_path = os.path.join(submit_dir, "softmax.out")
+        loge(f"-> actual_result_path: {actual_path}")
+        with open(actual_path) as f:
+            actual_output = f.read().strip()
         # actual_output.append(str(exec_result.returncode))
-        expected_output = str2list(expected_output)
-        if compare_list(actual_output, expected_output): 
+        # expected_output = str2list(expected_output)
+        loge(f"-> expected output: {expected_output}")
+        loge(f"-> actual output: {actual_output}")
+        if expected_output is not None: 
+            try:
+                exp = float(expected_output)
+                act = float(actual_output)
+                ok = (abs(exp - act) <= 1e-8)
+            except ValueError:
+                ok = (expected_output == actual_output)
+        else:
+            ok = False
+        if ok:
             result["verdict"] = Verdict.Accept
-            result["score"] = 0
+            result["score"] = case.score
             result["exe_result"] =  actual_output
-            print("--- Accept! ---")
+            loge("--- Accept! ---")
         else:
             result["verdict"] = Verdict.WrongAnswer
-            print("--- Wrong Answer! ---")
+            loge("--- Wrong Answer! ---")
             return result
     except subprocess.TimeoutExpired:
         loge("TimeoutExpired!")

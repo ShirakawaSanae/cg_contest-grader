@@ -13,6 +13,7 @@ def postwork(job: Job) -> dict:
     loge("postwork...")
     eval("postwork_" + phase + "(job)")
     loge("postwork...done")
+    #gg.exec("sleep 5s")
 
 def postwork_softmax(job: Job) -> dict:
     # 创建一个总结对象
@@ -29,7 +30,7 @@ def postwork_softmax(job: Job) -> dict:
         show_item['name'] = os.path.basename(result['name'])
         show_item['verdict'] = result['verdict']
         show_item['score'] = result['score']
-        print(result)
+        
         if result['verdict'] == Verdict.Accept:
             passed_tests += 1
         else:
@@ -37,6 +38,7 @@ def postwork_softmax(job: Job) -> dict:
             err_type = result['verdict']
         show_summary.append(show_item)
         all_tests += 1
+        loge(f"result{all_tests}: {result}")
         score += result['score']
     # 每个测试点所要展示的结果对象
     info = {
@@ -45,6 +47,7 @@ def postwork_softmax(job: Job) -> dict:
         "score": score,
         "err_type": err_type
     }
+    #gg.exec("sleep 5s")
     # 更新结果输出字段
     job.verdict("Accepted" if all_tests == passed_tests else "Wrong Answer")
     job.score(score)
@@ -52,10 +55,12 @@ def postwork_softmax(job: Job) -> dict:
     # 被渲染的页面应位于 kernel/templates/html 目录下
     # job.detail(gg.render_template("index.html", author="Charles Zhang", summary=summary))
     comment = gg.render_template(
-        "index.html", author="", summary=show_summary, info=info)
+        "index.html", author="A", summary=show_summary, info=info)
     job.comment(comment)
+    
 
 def postwork_lab2_warmup(job: Job) -> dict:
+    #gg.exec("sleep 5s")
     summary = job.get_summary()
 
     all_tests = 0
@@ -87,7 +92,6 @@ def postwork_lab2_warmup(job: Job) -> dict:
         "score": score,
         "err_type": err_type
     }
-
     # 更新结果输出字段
     job.verdict("Accepted" if all_tests == passed_tests else "Wrong Answer")
     job.score(score)
