@@ -34,6 +34,70 @@ def run(job: Job, case: TestCases.SingleTestCase) -> dict:
     loge("run...done")
     return result
 
+def run_pagedattn(job: Job, case: TestCases.SingleTestCase) -> dict:
+    # 创建一个结果对象
+    result = {
+        "name": basename(case.name),
+        "score": 0,
+        "scmax": case.score,
+        "verdict": Verdict.CompileError,
+        "detail": "",
+    }
+    loge("Running " + result["name"])
+    submit_path = case.extension["submit_path"]
+    loge(f"submit path: {submit_path}")
+    run_operation = (f"cd {submit_path} && bash -c 'source ./setup_env.sh && export TE_PARALLEL_COMPILER=1 && rm -rf kernel_meta && python Paged_attention.py'")
+
+    loge(f"-> calculate actual score")
+    try:  # 运行生成的程序
+        exec_result = gg.exec(run_operation)
+        stdout = exec_result.stdout if exec_result.stdout else ""
+        stderr = exec_result.stderr if exec_result.stderr else ""
+        loge(f"-> returncode: {exec_result.returncode}")
+        loge(f"-> stdout: {stdout}")
+        loge(f"-> stderr: {stderr}")
+
+        actual_output = str2list(exec_result.stdout) if exec_result.stdout else []
+        loge(f"-> actual_output: {actual_output}")
+        # actual_output.append(str(exec_result.returncode))
+        # loge(f"-> actual_output: {actual_output}")
+        if len(actual_output) >= 6:
+            acc_ratio = actual_output[-1]
+            loge(f"-> acc_ratio: {acc_ratio}")
+            acc_ratio = float(acc_ratio)
+            loge(f"-> acc_ratio: {acc_ratio}")
+            sc = acc_ratio * 0.18 - 9.1 
+            loge(f"-> linear score: {sc}")
+            sc = round(sc, 2)
+            loge(f"-> linear score: {sc}")
+            if sc <= 0.0:
+                sc = 0
+            if sc >= 100.0:
+                sc = 100.0
+            loge(f"-> linear score: {sc}")
+            sc = sc * 100
+            sc = int(sc)
+            loge(f"-> linear score: {sc}")
+            result["verdict"] = Verdict.Accept
+            result["score"] = sc
+        else:
+            result["verdict"] = Verdict.WrongAnswer
+            result["detail"] = stderr
+            return result
+    except subprocess.TimeoutExpired:
+        loge("TimeoutExpired!")
+        result["verdict"] = Verdict.TimeLimitError
+        result["detail"] = "The executable file has been running for too long"
+        return result
+    except Exception as e:
+        loge("Exception " + str(e))
+        result["verdict"] = Verdict.RuntimeError
+        result["detail"] = {"exception": e, "detail": stderr + "##" + traceback.format_exc()}
+        return result
+    return result
+
+
+
 def run_softmax(job: Job, case: TestCases.SingleTestCase) -> dict:
     # 创建一个结果对象
     result = {
@@ -45,25 +109,57 @@ def run_softmax(job: Job, case: TestCases.SingleTestCase) -> dict:
     }
     # 加载测试输入，若没有测试数据可以直接运行
     # 加载测试输出
+    loge(f"-> case.output_src: {case.output_src}")
+    expected_output = None
+    actual_output = None
     if case.output_src:
         with open(case.output_src) as f:
             expected_output = f.read()
-    loge(f"-> execute python ")
+    loge(f"-> set up env and execute python ")
     # 运行提交的程序
+    submit_dir = case.extension["submit_dir"]
+    loge(f"->submit_dir: {submit_dir}")
     try:  
-        run_operation = f"cd {case.submit_dir} && rm -r kernel_meta && python softmax.py"
-        exec_result = gg.exec(run_operation, time_out=None)
+        # run_operation = f"cd {case.extension["submit_dir"]} && rm -rf kernel_meta && python softmax.py"
+        # exec_result = gg.exec(run_operation, time_out=None)
+        run_operation = (
+            f"cd {submit_dir} && bash -c 'source ./setup_env.sh && rm -rf kernel_meta && python softmax.py'"
+        )
+        exec_result = gg.exec(run_operation)
+        loge(f"-> exec_result.stdout:{exec_result.stdout}")
         actual_output = str2list(exec_result.stdout) if exec_result.stdout else []
+        
+        stdout = exec_result.stdout.strip() if exec_result.stdout else ""
+        stderr = exec_result.stderr.strip() if exec_result.stderr else ""
+        loge(f"-> returncode: {exec_result.returncode}")
+        loge(f"-> stdout: {stdout}")
+        loge(f"-> stderr: {stderr}")
+       
+        # 加载学生的输出
+        #gg.exec("sleep 50s")
+        #actual_path = os.path.join(submit_dir, "softmax.out")
+        #loge(f"-> actual_result_path: {actual_path}")
+        #with open(actual_path) as f:
+        #    actual_output = f.read().strip()
         # actual_output.append(str(exec_result.returncode))
         expected_output = str2list(expected_output)
-        if compare_list(actual_output, expected_output): 
+        loge(f"-> expected output: {expected_output}")
+        loge(f"-> actual output: {actual_output}")
+        if compare_list(actual_output, expected_output):
+            if len(actual_output) != len(expected_output):
+                ok = False
+            else: 
+                ok = True
+        else:
+            ok = False
+        if ok:
             result["verdict"] = Verdict.Accept
-            result["score"] = 0
+            result["score"] = case.score
             result["exe_result"] =  actual_output
-            print("--- Accept! ---")
+            loge("--- Accept! ---")
         else:
             result["verdict"] = Verdict.WrongAnswer
-            print("--- Wrong Answer! ---")
+            loge("--- Wrong Answer! ---")
             return result
     except subprocess.TimeoutExpired:
         loge("TimeoutExpired!")

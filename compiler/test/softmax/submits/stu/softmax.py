@@ -124,11 +124,9 @@ x = torch.randn(1823, 781, device='npu')
 y_triton = softmax(x, stream)
 y_torch = torch.softmax(x, axis=1)
 assert torch.allclose(y_triton, y_torch), (y_triton, y_torch)
-print(y_triton)
-print(y_torch)
+
 #print(f'The maximum difference between torch and triton is '
 #      f'{torch.max(torch.abs(y_triton-y_torch))}')
 max_diff = torch.max(torch.abs(y_triton - y_torch)).item()
 
-with open("softmax.out", "w") as f:
-    f.write(f"{max_diff:.8f}\n")
+print(f"{max_diff:.8f}")

@@ -1,0 +1,10 @@
+{
+  "phase": "softmax",
+  "testcaseList": [
+    {
+      "name": "softmax",
+      "output": "/coursegrader/testdata/testcases/softmax.out",
+      "score": 100
+    }
+  ]
+}

@@ -13,6 +13,53 @@ def postwork(job: Job) -> dict:
     loge("postwork...")
     eval("postwork_" + phase + "(job)")
     loge("postwork...done")
+    gg.exec("sleep 5s")
+
+def format_float_from_int(num_int: int) -> str:
+    integer_part = num_int // 100
+    decimal_part = num_int % 100
+    if decimal_part != 0:
+        return f"{integer_part}.{decimal_part:02d}".rstrip('0')
+    return f"{integer_part}"
+
+def postwork_pagedattn(job: Job) -> dict:
+    total_score: int = 0
+    count: int = 1
+    detail = None
+    for i in job.get_summary():
+        if type(i) == dict and "score" in i:
+            total_score += i["score"]
+            detail = i["detail"]
+    # 更新结果输出字段
+    job_verdict = Verdict.Accept if sum(result['verdict'] == Verdict.Accept for result in job.get_summary()) == count else Verdict.WrongAnswer
+    job.verdict(job_verdict)
+    job.score((total_score + 99) // 100)
+    loge(f"score: {total_score}")
+
+    # 渲染信息
+    info = {
+        "all": len(job.get_testcases()),
+        "passed": sum(result['verdict'] == Verdict.Accept for result in job.get_summary()),
+        "score": format_float_from_int(total_score),
+        "err_type": job_verdict,
+        "detail": detail
+        
+    }
+    loge(f"show_score: {info['score']}")
+    gg.exec("sleep 5s")
+
+    # 渲染 HTML 模板页面（可选）
+    # 被渲染的页面应位于 kernel/templates/html 目录下
+    job.comment(gg.render_template(
+        "index.html", summary=sorted(job.get_summary()), info=info
+    ))
+    job.set_config({
+        'PATH': os.environ["PATH"],
+        'list /usr/local/bin': os.listdir("/usr/local/bin"),
+        'list /coursegrader': os.listdir("//coursegrader"),
+    })
+    job.secret(job.get_config())
+
 
 def postwork_softmax(job: Job) -> dict:
     # 创建一个总结对象
@@ -29,7 +76,7 @@ def postwork_softmax(job: Job) -> dict:
         show_item['name'] = os.path.basename(result['name'])
         show_item['verdict'] = result['verdict']
         show_item['score'] = result['score']
-        print(result)
+        
         if result['verdict'] == Verdict.Accept:
             passed_tests += 1
         else:
@@ -37,6 +84,7 @@ def postwork_softmax(job: Job) -> dict:
             err_type = result['verdict']
         show_summary.append(show_item)
         all_tests += 1
+        loge(f"result{all_tests}: {result}")
         score += result['score']
     # 每个测试点所要展示的结果对象
     info = {
@@ -45,17 +93,26 @@ def postwork_softmax(job: Job) -> dict:
         "score": score,
         "err_type": err_type
     }
+    #gg.exec("sleep 5s")
     # 更新结果输出字段
     job.verdict("Accepted" if all_tests == passed_tests else "Wrong Answer")
     job.score(score)
     # 渲染 HTML 模板页面（可选）
     # 被渲染的页面应位于 kernel/templates/html 目录下
     # job.detail(gg.render_template("index.html", author="Charles Zhang", summary=summary))
-    comment = gg.render_template(
-        "index.html", author="", summary=show_summary, info=info)
-    job.comment(comment)
+    job.comment(gg.render_template(
+        "index.html", summary=job.get_summary(), info=info
+    ))
+    job.set_config({
+        'PATH': os.environ["PATH"],
+        'list /usr/local/bin': os.listdir("/usr/local/bin"),
+        'list /coursegrader': os.listdir("//coursegrader"),
+    })
+    job.secret(job.get_config())
+    
 
 def postwork_lab2_warmup(job: Job) -> dict:
+    #gg.exec("sleep 5s")
     summary = job.get_summary()
 
     all_tests = 0
@@ -87,7 +144,6 @@ def postwork_lab2_warmup(job: Job) -> dict:
         "score": score,
         "err_type": err_type
     }
-
     # 更新结果输出字段
     job.verdict("Accepted" if all_tests == passed_tests else "Wrong Answer")
     job.score(score)
@@ -98,13 +154,6 @@ def postwork_lab2_warmup(job: Job) -> dict:
         "index.html", author="Charles Zhang", summary=show_summary, info=info)
     job.comment(comment)
 
-
-def format_float_from_int(num_int: int) -> str:
-    integer_part = num_int // 100
-    decimal_part = num_int % 100
-    if decimal_part != 0:
-        return f"{integer_part}.{decimal_part:02d}".rstrip('0')
-    return f"{integer_part}"
 
 def postwork_lab4_mem2reg(job: Job) -> dict:
     total_score: int = 0

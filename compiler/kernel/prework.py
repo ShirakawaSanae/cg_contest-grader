@@ -18,14 +18,15 @@ from pygrading.exception import ExecError
 @CG.catch
 def prework(job: Job):
     config_file = os.path.join(
-        job.get_config().testcase_dir, "caseconfig.json"
+        job.get_config().testcase_dir, "caseconfig.json" # 本地测试可以改成testcases/caseconfig.json
     )
+    loge(job.get_config().testcase_dir)
     loge("prework config_file " + config_file)
     if not os.path.exists(config_file):
         loge("prework config_file not exist")
         testdata = job.get_config().testcase_dir
-        testcases = os.path.join(testdata, "testdata")
-
+        testcases = os.path.join(testdata, "testcases")
+        loge(testcases)
         detail = {
             "pwd": os.curdir,
             testdata: os.listdir(testdata),
@@ -52,6 +53,47 @@ def prework(job: Job):
     eval("prework_" + phase + "(job)")
     loge("prework...done")
 
+def prework_pagedattn(job: Job):
+    # 获取测试点和配置信息
+    testcase_dir = job.get_config().testcase_dir
+    files_config = {}
+    config_file = os.path.join(testcase_dir, "caseconfig.json")
+    loge(f"--- config_file: {config_file}")
+    with open(config_file) as conf:
+        raw_data = conf.read()
+        files_config = json.loads(raw_data)
+    testcaseList = files_config.get("testcaseList")
+    # 设置满分
+    testcases = gg.create_testcase(100)
+    submit_dir = job.get_config().submit_dir
+    loge(f"--- submit_dir: {submit_dir}, {job.get_config()}")
+    try:
+        # 建立 Ascend 环境
+        compile_result = gg.exec(f"bash -lc 'cd {submit_dir} && source setup_env.sh'")
+        loge(f"-> executed setup_env.sh and get result {compile_result.returncode}")
+        gg.exec("sleep 5s")
+        if compile_result.returncode != 0:
+            raise CG.CompileError(compile_result.stderr)
+    # 异常编译错误
+    except CG.CompileError as e:
+        job.verdict(Verdict.CompileError)
+        job.comment(str(e))
+        job.is_terminate = True
+        return
+    # 异常系统错误
+    except OSError as e:
+        job.verdict(Verdict.CompileError)
+        job.comment(f"OSError: {e}")
+        job.is_terminate = True
+        return
+    for itemCase in sorted(testcaseList, key=itemgetter('name')):
+        name = itemCase["name"]
+        score : int = int(itemCase["score"])
+        submit_path = itemCase["submit_path"]
+        testcases.append(name = name, score = score, extension={"submit_path": submit_path})
+    # 更新测试用例和配置信息到任务
+    job.set_testcases(testcases)
+
 def prework_softmax(job:Job):
     # 获取测试点和配置信息
     testcase_dir = os.path.join(job.get_config().testcase_dir, "testcases")
@@ -67,10 +109,12 @@ def prework_softmax(job:Job):
     job.set_testcases(testcases)
     # 编译学生提交的程序
     submit_dir = job.get_config().submit_dir
-    print(submit_dir)
+    loge(f"--- submit_dir: {submit_dir}, {job.get_config()}")
     try:
         # 建立 Ascend 环境
-        compile_result = gg.exec("cd /coursegrader/submits && source setup_env.sh", shell=True, executable="/bin/bash")
+        compile_result = gg.exec(f"bash -lc 'cd {submit_dir} && source setup_env.sh'")
+        loge(f"-> executed setup_env.sh and get result {compile_result.returncode}")
+        gg.exec("sleep 5s")
         if compile_result.returncode != 0:
             raise CG.CompileError(compile_result.stderr)
     # 异常编译错误
@@ -86,13 +130,14 @@ def prework_softmax(job:Job):
         job.is_terminate = True
         return
     # 加载测试点到希冀 testcases
+    gg.exec("sleep 5s")
     for itemCase in testcaseList:
         name = itemCase["name"]
         score = itemCase["score"]
         itemCaseDir = itemCase["output"]
-        print(itemCaseDir)
+        loge(f"--- expected output file: {itemCaseDir}")
         if os.path.exists(itemCaseDir):
-            testcases.append(name = name, output_src = itemCaseDir, score = score, submit_dir = submit_dir, extension = {"detail": ""})
+            testcases.append(name = name, output_src = itemCaseDir, score = score, extension = {"detail": "", "submit_dir": submit_dir})
         else:
             detail = "Error: Cannot find testcase "+ name
             testcases.append(name=name, output_src = itemCaseDir, score=score, extension = {"detail": detail})
@@ -155,7 +200,7 @@ def prework_lab2_warmup(job: Job):
         answer = itemCase_hand["answer"]
         itemCaseDir = os.path.join(
             submit_dir, itemCase_hand["submit_relative_path"])
-        # print(itemCaseDir)
+        # loge(itemCaseDir)
         if os.path.exists(itemCaseDir):
             testcases.append(name=name, input_src=itemCaseDir, score=score, extension={
                              "answer": answer, "detail": ""})
